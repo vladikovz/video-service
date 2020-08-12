@@ -1,1 +1,1 @@
-# video-service
+<h2>This is the web video service on React!</h2>

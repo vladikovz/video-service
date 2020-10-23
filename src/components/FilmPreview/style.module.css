@@ -1,0 +1,55 @@
+.mainWrapper{
+   height: 100vh;
+}
+
+.videoBackground {
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%,-50%);
+    z-index: -1;
+}
+.movieNav {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+}
+.mainInformation {
+    color: #fff8f8;
+    margin: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.movieTitle {
+    font-size: 20px;
+    font-weight: 300;
+    margin: 10px 0;
+}
+
+.movieDescription {
+    font-weight: 300;
+    margin: 10px 0;
+}
+
+.movieManage {
+    display: flex;
+    margin: 10px 0;
+    justify-content: space-between;
+}
+
+.settingsButton:first-child{
+    margin-right: 10px;
+}
+
+.moviesSettings {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 40px;
+}

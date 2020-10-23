@@ -1,0 +1,6 @@
+.cardBackground {
+    display: flex;
+    width: 200px;
+    height: 70px;
+    background-color: darkgoldenrod;
+}

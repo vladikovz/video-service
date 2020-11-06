@@ -3,14 +3,27 @@ import {PageLayout} from "../components/layout/PageLayout/PageLayout";
 import {PageHeader} from "../components/navigation/PageHeader/PageHeader";
 import {FilmPreview} from "../components/FilmPreview/FilmPreview";
 import {FilmList} from "../components/FilmList/FilmList";
+import {TrendingMoviesPart} from "../components/TrendingMoviesPart/TrendingMoviesPart";
+import {computed} from "mobx";
+import {IStore} from "../interfaces/common/IStore";
+import {inject, observer} from "mobx-react";
 
-export class MainPage extends Component {
+@inject("store")
+@observer
+export class MainPage extends Component<IStore> {
+    @computed
+    get store() {
+        return this.props.store!;
+    }
+
+
     render() {
         return (
             <PageLayout>
                 <PageHeader/>
                 <FilmPreview/>
                 <FilmList/>
+                <TrendingMoviesPart/>
                 {/*  <div >*/}
                 {/*  Lorem ipsum, arcu donec nulla, tellus auctor nec sodales sed: justo*/}
                 {/*  congue massa metus ipsum auctor, sit tellus pharetra, sapien at. Et*/}

@@ -1,0 +1,123 @@
+.root {
+    margin: 40px 40px;
+}
+
+.movieTitle {
+    border-radius: 10px;
+    margin: 5%;
+    transition-duration: 0.2s;
+}
+
+.inner {
+    position: relative;
+    margin-right: 10px;
+}
+
+.slickFlex {
+    display: flex !important;
+}
+
+.movieCard:hover .movieTitle {
+    display: flex;
+    flex-direction: row;
+    margin: 4%;
+    transition-duration: 0.2s;
+}
+
+.poster {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.listTitle {
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-size: 25px;
+    padding-right: 20px;
+}
+
+.titleRightArrow {
+    display: none;
+    margin-top: 7px;
+    height: 15px;
+}
+
+.listTitle:hover .titleRightArrow {
+    display: block;
+}
+
+.root:hover .nextArrowWrapper {
+    display: flex;
+}
+
+.listRightArrow {
+    position: relative;
+    display: flex;
+    height: 60px;
+    z-index: 1;
+}
+
+.root:hover .wrapperRightArrow {
+    display: flex;
+}
+
+.root:hover .arrowRightBackground {
+    display: flex;
+}
+
+.wrapperRightArrow {
+    display: none;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    right: 2px;
+}
+
+.arrowRightBackground {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 60px;
+    height: 100%;
+    background-color: white;
+    opacity: 50%;
+    border-radius: 40px 0 0 40px;
+}
+
+.root:hover .arrowLeftBackground {
+    display: flex;
+}
+
+.listLeftArrow {
+    position: relative;
+    display: flex;
+    height: 60px;
+    z-index: 5;
+}
+
+.root:hover .wrapperLeftArrow {
+    display: flex;
+}
+
+.wrapperLeftArrow {
+    display: none;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    left: 2px;
+}
+
+.arrowLeftBackground {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 60px;
+    height: 100%;
+    background-color: white;
+    opacity: 50%;
+    border-radius: 0 40px 40px 0;
+    z-index: 1;
+}

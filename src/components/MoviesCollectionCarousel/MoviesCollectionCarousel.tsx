@@ -13,51 +13,73 @@ import {Link} from "react-router-dom";
 
 const imgPath: string = "https://image.tmdb.org/t/p/w500";
 
+interface IMoviesCollectionCarouselProps {
+    title: string;
+    moviesCollection: any[];
+    link: string;
+}
+
+interface IMoviesCollectionCarousel
+    extends IMoviesCollectionCarouselProps,
+        IStore {
+}
+
 @inject("store")
 @observer
-export class TrendingMoviesPart extends Component<IStore> {
+export class MoviesCollectionCarousel extends Component<IMoviesCollectionCarousel> {
     @computed
     get store() {
         return this.props.store!;
     }
 
-    async componentDidMount() {
-        await this.store.movie.getTrendingMoviesList();
-    }
+    state = {
+        value: false,
+    };
 
     SampleNextArrow(props: any) {
         const {onClick} = props;
         return (
             <>
-                <div className={style.wrapperRightArrow} onClick={onClick}>
-                    <img src={rightArrow} alt={"pic"} className={style.listRightArrow}/>
+                <div onClick={onClick}>
+                    <div className={style.wrapperRightArrow}>
+                        <img
+                            src={rightArrow}
+                            alt={"pic"}
+                            className={style.listRightArrow}
+                        />
+                    </div>
+                    <div className={style.arrowRightBackground}/>
                 </div>
-                <div className={style.arrowRightBackground} />
             </>
         );
     }
 
     SamplePrevArrow(props: any) {
-      const {onClick} = props;
-      return (
-          <>
-            <div className={style.arrowLeftBackground} />
-            <div className={style.wrapperLeftArrow} onClick={onClick}>
-              <img src={leftArrow} alt={"pic"} className={style.listLeftArrow}/>
-            </div>
+        const {onClick} = props;
+        return (
+            <>
+                <div onClick={onClick}>
+                    <div className={style.arrowLeftBackground}/>
+                    <div className={style.wrapperLeftArrow}>
+                        <img src={leftArrow} alt={"pic"} className={style.listLeftArrow}/>
+                    </div>
+                </div>
+            </>
+        );
+    }
 
-          </>
-      );
+    show(value: boolean) {
+        this.setState({value});
     }
 
     settings = {
         dots: true,
-        infinite: false,
+        infinite: true,
         speed: 1000,
-        slidesToShow: 4.5,
+        slidesToShow: 4,
         slidesToScroll: 4,
-      autoplay: true,
-        autoplaySpeed: 4000,
+        autoplay: true,
+        autoplaySpeed: 5000,
         pauseOnHover: true,
         nextArrow: <this.SampleNextArrow/>,
         prevArrow: <this.SamplePrevArrow/>,
@@ -65,13 +87,16 @@ export class TrendingMoviesPart extends Component<IStore> {
     };
 
     render() {
-        return !this.store.movie.trendingMovies.length ? (
+        this.props.moviesCollection.map((movie) => {
+            this.store.movie.getTrailers(movie.id);
+        });
+        return !this.props.moviesCollection.length ? (
             <div>Skeleton</div>
         ) : (
             <div className={style.root}>
-                <Link to={"/trending"}>
+                <Link to={this.props.link}>
                     <div className={style.listTitle}>
-                        <h2 className={style.title}>Trending</h2>
+                        <h2 className={style.title}>{this.props.title}</h2>
                         <img
                             src={rightArrow}
                             alt={"pic"}
@@ -81,14 +106,18 @@ export class TrendingMoviesPart extends Component<IStore> {
                 </Link>
 
                 <Slider {...this.settings}>
-                    {this.store.movie.trendingMovies.map((movie) => {
+                    {this.props.moviesCollection.map((movie) => {
                         return (
-                            <GridListTile key={movie.id} className={style.movieCard}>
+                            <GridListTile
+                                key={movie.id}
+                                className={style.movieCard}
+                                onClick={() => this.show(true)}
+                            >
                                 <div>
                                     <div className={style.inner}>
                                         <img
                                             className={style.poster}
-                                            src={imgPath + movie.backdrop_path!}
+                                            src={imgPath + movie.backdrop_path}
                                             alt={movie.title}
                                         />
                                         <GridListTileBar
@@ -101,6 +130,7 @@ export class TrendingMoviesPart extends Component<IStore> {
                         );
                     })}
                 </Slider>
+                {/*{this.state.value? <FilmPreview trailer={"dd"} title={'dd'}/> : <></>}*/}
             </div>
         );
     }

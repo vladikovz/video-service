@@ -1,0 +1,11 @@
+.filmListBackground {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 800px;
+    max-height: 100px;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+}

@@ -1,36 +1,43 @@
 import React, {Component} from "react";
-import cr from "./cr.mp4";
 import style from "./style.module.css";
 import {Button} from "@material-ui/core";
 import {inject, observer} from "mobx-react";
 import {computed} from "mobx";
 import {IStore} from "../../interfaces/common/IStore";
 
+interface IFilmPreviewProps {
+    trailer: string;
+    title: string;
+    description: string;
+}
+
+interface IFilmPreview extends IFilmPreviewProps, IStore {
+}
+
 @inject("store")
 @observer
-export class FilmPreview extends Component<IStore> {
+export class FilmPreview extends Component<IFilmPreview> {
     @computed
     get store() {
-        return this.props.store!
+        return this.props.store!;
     }
 
     render() {
         return (
             <>
                 <section className={style.mainWrapper}>
-                    <video className={style.videoBackground} autoPlay loop muted>
-                        <source src={cr} type="video/mp4"/>
-                    </video>
+                    <div className={style.videoBackground}>
+                        <iframe
+                            frameBorder="0"
+                            className={style.iframe}
+                            src={this.props.trailer}
+                        />
+                    </div>
                     <div className={style.movieNav}>some navigation</div>
                     <div className={style.mainInformation}>
-                        <div className={style.movieTitle}>Avatar</div>
+                        <div className={style.movieTitle}>{this.props.title}</div>
                         <div className={style.movieDescription}>
-                            Lorem ipsum, arcu donec nulla, tellus auctor nec sodales sed:
-                            justo congue massa metus ipsum auctor, sit tellus pharetra,
-                            sapien at. Et bibendum congue: vivamus molestie amet ipsum et,
-                            sapien morbi, metus magna, maecenas fusce quam, eget. Arcu
-                            sagittis magna, quam elementum cursus proin porta urna nec
-                            proin. Ipsum maecenas lectus tellus
+                            {this.props.description}
                         </div>
                         <div className={style.movieManage}>
                             <Button
